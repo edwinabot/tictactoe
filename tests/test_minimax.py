@@ -19,13 +19,13 @@ class TestMinimize(unittest.TestCase):
 
     def test_winning_move(self):
         self.board.place_mark(2)
-        score = minimize(self.board, -1)
-        self.assertEqual(score, -10)
+        score = minimize(self.board, 10)
+        self.assertEqual(score, -60)
 
     def test_loosing_move(self):
         self.board.place_mark(5)
-        score = maximize(self.board, -1)
-        self.assertEqual(score, 10)
+        score = maximize(self.board, 10)
+        self.assertEqual(score, 59)
 
 
 if __name__ == "__main__":

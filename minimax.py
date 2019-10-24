@@ -4,18 +4,20 @@ import copy
 from board_representation import Board, NonBlankSquareException, Mark
 
 
-def evaluate(board: Board):
+def evaluate(board: Board, depth: int):
+    ttt_value = 50
     score = 0
     if board.is_tic_tac_toe:
-        score = score + 10 if board.playing == Mark.NOUGHT else score - 10
+        score = score + ttt_value if board.playing == Mark.NOUGHT else score - ttt_value
     elif board.is_a_draw:
         score = 0
+    score = score + depth if board.playing == Mark.NOUGHT else score - depth
     return score
 
 
 def minimize(board: Board, depth: int):
     if not board.is_still_on_play or depth == 0:
-        return evaluate(board)
+        return evaluate(board, depth)
 
     best_score = 10**100
     for i in board.available_squares:
@@ -31,7 +33,7 @@ def minimize(board: Board, depth: int):
 
 def maximize(board: Board, depth: int):
     if not board.is_still_on_play or depth == 0:
-        return evaluate(board)
+        return evaluate(board, depth)
 
     best_score = -10**100
     for i in board.available_squares:
