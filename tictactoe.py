@@ -4,7 +4,7 @@ import copy
 from board_representation import Board, NonBlankSquareException, GameOverException, Mark
 from minimax import minimax
 
-SEARCH_DEPTH = int(os.getenv('SEARCH_DEPTH', '3'))
+SEARCH_DEPTH = int(os.getenv('SEARCH_DEPTH', '-1'))
 
 def ai_play(board: Board):
     best_move = None
