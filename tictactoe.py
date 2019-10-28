@@ -8,14 +8,15 @@ SEARCH_DEPTH = int(os.getenv('SEARCH_DEPTH', '10'))
 if SEARCH_DEPTH < 0:
     raise ValueError('SEARCH_DEPTH must be greater or equal to 0')
 
-def ai_play(board: Board):
+
+def ai_play(board: Board, search_depth: int=SEARCH_DEPTH):
     best_move = None
     best_move_score = None
     for i in board.available_squares:
         board_clone = copy.deepcopy(board)
         board_clone.place_mark(i)
-        score = minimax(board_clone, SEARCH_DEPTH)
-        if best_move_score is None:
+        score = minimax(board_clone, search_depth)
+        if best_move is None:
             best_move = i
             best_move_score = score
         else:

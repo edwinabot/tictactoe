@@ -21,7 +21,7 @@ class Status(Enum):
 class Mark(Enum):
     CROSS = 'x'
     NOUGHT = 'o'
-    BLANK = ' '
+    BLANK = None
 
 
 class Board:
@@ -35,9 +35,10 @@ class Board:
         self.__is_tic_tac_toe = False
 
     def __str__(self):
+        marks = [m.value if m.value else ' ' for m in self.grid]
         rows = []
         for ray in ((6, 7, 8), (3, 4, 5), (0, 1, 2)):
-            rows.append('|'.join(self.grid[r].value for r in ray))
+            rows.append('|'.join(marks[r] for r in ray))
         grid = '\n-----\n'.join(rows)
         grid += f'\nPlaying: {self.playing.name}'
         grid += f'\nStatus: {self.status.name}'
